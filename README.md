@@ -33,7 +33,9 @@ Finally the api was up and running on port 80 and could be accessed by the asg i
 
 And here is the result of searching for the book with the id of 2  
 
-![1984 has the id of 2](https://github.com/Isracoder/express-book-management/assets/90979049/2679fc16-7eda-452e-8db5-4f5a0f272c72)
+![1984 has the id of 2](https://github.com/Isracoder/express-book-management/assets/90979049/2679fc16-7eda-452e-8db5-4f5a0f272c72)   
+
+PS. Don't worry I terminated everything 🤡
 
 
 
