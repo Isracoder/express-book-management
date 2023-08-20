@@ -1,5 +1,5 @@
 import express from "express";
-import data from "./data/Sample_data.js";
+import data from "Sample_data.js";
 const app = express();
 const PORT = process.env.PORT || 3000;
 app.use(express.json());
