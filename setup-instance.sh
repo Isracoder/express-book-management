@@ -1,30 +1,18 @@
-#!/bin/sh
-set -e
-
+#!/bin/bash
 sudo apt update
-sudo apt upgrade -y
+sudo apt install -y nodejs npm
+#sudo ln -s /usr/bin/nodejs /usr/bin/node
 
-# install nodejs repo
-curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+cd /home/ubuntu
+git clone https://github.com/Isracoder/express-book-management.git express-book-management
 
-sudo apt install nodejs jq curl -y
-npm i express
+cd express-book-management
+sudo npm install express
 
-# create app & github users
-sudo useradd --system --create-home --shell /usr/sbin/nologin app
-sudo useradd -g app --no-create-home --no-user-group --home-dir /home/app --shell /bin/bash github
-sudo usermod --append --groups app github
-
-# deploy app
-repo="Isracoder/express-book-manegement"
-download_url=$(curl "https://api.github.com/repos/$repo/releases/latest" | jq --raw-output '.assets[0].browser_download_url')
-asset_name=$(curl "https://api.github.com/repos/$repo/releases/latest" | jq --raw-output '.assets[0].name')
-
-curl -O "https://raw.githubusercontent.com/$repo/main/app.service"
 sudo mv app.service /etc/systemd/system/
 sudo systemctl daemon-reload
 sudo systemctl enable app.service
 
-sudo -u app sh -c "mkdir -p /home/ubuntu/app && cd /home/ubuntu/app && curl -LO $download_url && mv $asset_name app.tar.gz && tar xzvf app.tar.gz && npm install --omit=dev"
+#sudo systemctl start app.service
 
 sudo reboot
